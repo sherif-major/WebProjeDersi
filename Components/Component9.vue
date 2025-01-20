@@ -191,25 +191,31 @@ export default defineComponent({
   },
 });
 </script>
-
 <style scoped>
 .store-container {
   display: flex;
+  justify-content: center; /* Yatayda ortalar */
+  align-items: flex-start; /* Dikeyde hizayı yukarı alır */
+  gap: 80px; /* Araya boşluk ekler */
   font-family: Arial, sans-serif;
   margin: 20px;
+  box-sizing: border-box;
+  
 }
 
 /* Sol Menü */
 .store-menu {
-  width: 25%;
-  border-right: 1px solid #ddd;
-  padding-right: 20px;
+  position: relative;
+  max-height: 458px;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
 }
 
 .store-menu h3 {
   font-size: 18px;
   font-weight: bold;
   margin-bottom: 10px;
+  text-align: center; /* Başlığı ortalar */
 }
 
 .store-menu ul {
@@ -234,7 +240,7 @@ export default defineComponent({
 
 /* Sağ Menü */
 .store-details {
-  width: 75%;
+  width: 50%; /* Daha geniş bir alan verir */
   padding-left: 20px;
 }
 
