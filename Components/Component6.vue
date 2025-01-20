@@ -12,7 +12,6 @@
           <img :src="item.image" :alt="item.title" />
           <p class="slide-title">{{ item.title }}</p>
           <p class="slide-description">{{ item.description }}</p>
-          <button class="shop-now">Alışverişe Başla</button>
         </div>
       </div>
 
@@ -40,19 +39,13 @@ export default {
       currentSlide: 0,
       sliderItems: [
         {
-          image: "https://cdn.beymen.com/bannerimages/12G_Fullwith_2496x988-kis-sezonu-1_2024120215000563013.webp",
-          title: "Kış Modası",
-          description: "50.000 TL ve üzeri alışverişinize 12.000 TL indirim.",
+          image: "https://cdn.beymen.com/bannerimages/deskkam_2025011714104996964.gif",
         },
         {
-          image: "https://cdn.beymen.com/bannerimages/YILDIZLI12G_Fullwith_2496x988_2024113017490447833.webp",
-          title: "Yeni Koleksiyon",
-          description: "Sonbahar/Kış sezonuna özel fırsatlar.",
+          image: "https://cdn.beymen.com/bannerimages/12G_Fullwith_2496x988_az_2025011709465892016.png",
         },
         {
-          image: "https://cdn.beymen.com/bannerimages/G_2024120211400896667.jpg",
-          title: "Kampanyalar",
-          description: "Seçili ürünlerde cazip indirimler.",
+          image: "https://cdn.beymen.com/bannerimages/yslblush_2025011719163638521.jpg",
         },
       ],
     };
@@ -77,17 +70,20 @@ export default {
 
 <style scoped>
 .slider-container {
+  position:relative;
   width: 100%;
-  max-width: 1200px;
+  max-width: 100%;
   margin: 0 auto;
-  text-align: center;
+  text-align:center;
+  overflow:hidden;
+  border-radius:8px;
+  padding: 0;
 }
 
 .slider-wrapper {
   position: relative;
   overflow: hidden;
   width: 100%;
-  height: 400px;
 }
 
 .slider-content {
@@ -98,16 +94,17 @@ export default {
 .slide {
   min-width: 100%;
   text-align: center;
+  height: auto;
 }
 
 .slide img {
   width: 100%;
   height: auto;
   border-radius: 8px;
+  object-fit:cover;
 }
 
 .shop-now {
-  padding: 10px 20px;
   background-color: #8A2BE2;
   color: #fff;
   border: none;
@@ -135,20 +132,20 @@ export default {
 }
 
 .slider-indicators {
-  margin-top: 10px;
+  margin-top: 1px;
 }
 
 .indicator {
   display: inline-block;
   width: 10px;
   height: 10px;
-  background: gray;
+  background: LightGray;
   margin: 0 5px;
   border-radius: 50%;
   cursor: pointer;
 }
 
 .indicator.active {
-  background: #8A2BE2;
+  background:rgb(0, 0, 0);
 }
 </style>
