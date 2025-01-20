@@ -34,7 +34,7 @@
     <!-- Hesabınız Var mı? -->
     <p class="login-prompt">
       Hesabınız var mı?
-      <router-link to="/component2">Giriş Yapın</router-link>
+      <router-link >Giriş Yapın</router-link>
     </p>
   </div>
 </template>
@@ -65,7 +65,7 @@ export default {
   max-width: 400px;
   margin: 0 auto;
   padding: 20px;
-  background-color: #fff;
+  background-color: #f4f5f6;
   border-radius: 8px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   font-family: Arial, sans-serif;
@@ -92,7 +92,7 @@ label {
 }
 
 input {
-  width: 100%;
+  width: 95%;
   padding: 10px;
   margin-bottom: 15px;
   border: 1px solid #ccc;
