@@ -1,323 +1,147 @@
 <template>
   <div class="product-page">
-    <!-- Üst Menü -->
-    <div class="top-bar">
-      <button class="filter-button" @click="toggleFilterMenu">
-        Filtreler
-      </button>
-      <div class="breadcrumb">Kadın Giyim / Tümü</div>
-      <button class="sort-button">Akıllı Sıralama</button>
-    </div>
-
-    <!-- Filtre Menüsü -->
-    <transition name="slide-down">
-      <div
-        v-if="showFilterMenu"
-        class="filter-menu"
-      >
-        <ul class="filter-list">
-          <li
-            v-for="(filter, index) in filters"
-            :key="index"
-            @mouseenter="filter === 'Marka' ? openSubmenu() : closeSubmenu()"
-          >
-            {{ filter }}
-          </li>
-        </ul>
-
-        <!-- Marka Alt Menü -->
-        <div v-if="showSubmenu" class="submenu">
-          <h4>Markalar</h4>
-          <div class="checkbox-group">
-            <label
-              v-for="(brand, index) in brands"
-              :key="index"
-              class="checkbox-label"
-            >
-              <input type="checkbox" :value="brand" /> {{ brand }}
-            </label>
-          </div>
-        </div>
+    <!-- Filtrele, Kadın (49464 Ürün), ve Sırala -->
+    <div class="header-buttons">
+      <button class="filter-button">Filtrele</button>
+      <div class="breadcrumb">
+        <span class="product-count">Kadın (49464 Ürün)</span>
+        <span>Ana Sayfa / Kadın</span>
+        
       </div>
-    </transition>
-
-    <!-- Kategori Menüsü -->
-    <div class="category-menu">
-      <button
-        v-for="(category, index) in categories"
-        :key="index"
-        class="category-button"
-      >
-        {{ category }}
-      </button>
+      <button class="sort-button">Sırala</button>
     </div>
 
     <!-- Ürün Listesi -->
-    <div class="product-grid">
-      <div
-        v-for="(product, index) in products"
-        :key="index"
-        class="product-card"
-      >
-        <img :src="product.image" :alt="product.name" />
-        <p class="product-brand">{{ product.brand }}</p>
-        <p class="product-name">{{ product.name }}</p>
-        <p class="product-price">{{ product.price }}</p>
-        <button class="add-to-cart">Sepete Ekle</button>
+    <div class="product-container">
+      <div v-for="product in products" :key="product.id" class="product">
+        <img :src="product.image" alt="Ürün Resmi" class="product-image" />
+        <h3>{{ product.name }}</h3>
+        <p class="price">{{ product.price }}</p>
+        <button @click="addToCart(product)" class="add-to-cart-button">Sepete Ekle</button>
       </div>
     </div>
   </div>
 </template>
 
-<script>
-export default {
-  data() {
-    return {
-      showFilterMenu: false, // Filtre menüsü görünürlüğü
-      showSubmenu: false, // Alt menü (Marka) görünürlüğü
-      filters: ["Ürün Çeşidi", "Beden", "Renk", "Sezon", "Doğa Dostu", "Marka"],
-      brands: ["Nike", "Adidas", "Puma"], // Marka isimleri
-      categories: [
-        "Tümünü Gör",
-        "Elbise",
-        "Dış Giyim",
-        "Pantolon",
-        "Gömlek & Bluz",
-        "T-Shirt",
-        "Ceket",
-        "Triko & Kazak",
-        "Spor Giyim",
-        "Sweatshirt",
-      ],
-      products: [
-        {
-          image:
-            "https://cdn.beymen.com/mnresize/435/-/productimages/vszpq1cb.ksf_IMG_02_2110093632069.jpg",
-          brand: "Les Benjamins",
-          name: "Siyah Sweatshirt",
-          price: "3.999 TL",
-        },
-        {
-          image:
-            "https://cdn.beymen.com/mnresize/435/-/productimages/okgwza32.wav_IMG_01_8683791428998.jpg",
-          brand: "Beymen Club",
-          name: "Siyah Kruvaze Blazer",
-          price: "8.950 TL",
-        },
-        {
-          image:
-            "https://cdn.beymen.com/mnresize/435/-/productimages/dcvoxlza.peu_IMG_01_2110097546232.jpg",
-          brand: "Moncler",
-          name: "Bady Siyah Kapüşonlu Puff Mont",
-          price: "55.950 TL",
-        },
-        {
-          image:
-            "https://cdn.beymen.com/mnresize/435/-/productimages/z4xhgz0m.xuy_IMG_01_2110093618865.jpg",
-          brand: "Polo Ralph Lauren",
-          name: "Polo Bear Bisiklet Yaka Kazak",
-          price: "18.750 TL",
-        },
-      ],
-    };
-  },
-  methods: {
-    toggleFilterMenu() {
-      this.showFilterMenu = !this.showFilterMenu;
-    },
-    openSubmenu() {
-      this.showSubmenu = true;
-    },
-    closeSubmenu() {
-      this.showSubmenu = false;
-    },
-  },
-};
+<script setup>
+import { ref } from "vue";
+import { useCartStore } from "~/stores/cart";
+
+// Örnek ürün listesi
+const products = ref([
+  { id: "1", name: "Polo Ralph Lauren Polo Bear Lacivert Logo Jakarlı Kazak", image: "https://cdn.beymen.com/mnresize/335/-/productimages/tzfyxpzw.2ti_IMG_01_2110095268181.jpg", price: "22450 TL", quantity: 1 },
+  { id: "2", name: "Polo Ralph Lauren Antrasit Sweatshirt", image: "https://cdn.beymen.com/mnresize/335/-/productimages/lmgvgsvh.zkn_IMG_01_2110097701228.jpg", price: "10450 TL", quantity: 1 },
+  { id: "3", name: "Polo Ralph Lauren Polo Bear Lacivert Beyaz T-shirt", image: "https://cdn.beymen.com/mnresize/335/-/productimages/ajfh3n2w.rgh_IMG_01_2110097702218.jpg", price: "5950 TL", quantity: 1 },
+  { id: "4", name: "George Hogg Siyah Deri Gova", image: "https://cdn.beymen.com/mnresize/335/-/productimages/1r4nbeym.jer_IMG_01_8683798436699.jpg", price: "4899 TL", quantity: 1 },
+]);
+
+const cartStore = useCartStore();
+
+// Sepete ürün ekleme
+function addToCart(product) {
+  cartStore.addToCart(product);
+  alert(`${product.name} sepete eklendi!`);
+}
 </script>
 
-<style scoped>
-/* Genel Sayfa Yapısı */
+<style>
+/* Sayfa düzeni */
 .product-page {
-  padding: 20px;
-  font-family: Arial, sans-serif;
-  background-color: #f9f9f9;
   position: relative;
+  padding: 20px;
 }
 
-/* Üst Menü */
-.top-bar {
+/* Kategori yolu ve ürün sayısı */
+.breadcrumb {
+  font-size: 14px;
+  color: #666;
+  margin-bottom: 10px;
+  line-height: 1.4; /* Daha yakın aralık */
+}
+
+.breadcrumb .product-count {
+  font-size: 16px;
+  font-weight: bold;
+  color: #000;
+  display: block; /* Yeni satıra geçmesi için */
+  margin-top: 4px; /* Üst metne yakınlaştırma */
+  text-align: center;
+}
+
+/* Filtrele ve Sırala düğmeleri */
+.header-buttons {
   display: flex;
   justify-content: space-between;
-  align-items: center;
   margin-bottom: 20px;
 }
 
 .filter-button,
 .sort-button {
-  background-color: #000;
-  color: #fff;
+  padding: 12px 20px;
+  font-size: 14px;
+  background-color: #000000;
+  color: white;
   border: none;
-  padding: 10px 20px;
-  font-size: 14px;
-  border-radius: 4px;
   cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
 }
 
-.breadcrumb {
-  font-size: 14px;
-  color: #666;
+.filter-button:hover,
+.sort-button:hover {
+  background-color: #404040;
+  transform: scale(1.05);
 }
 
-/* Filtre Menüsü */
-.filter-menu {
-  position: absolute;
-  top: 60px;
-  left: 0;
-  right: 0;
-  margin: auto;
-  width: 100%;
-  max-width: 400px;
-  background-color: #fff;
-  border: 1px solid #ddd;
-  border-radius: 8px;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-  z-index: 1000;
-  overflow: hidden;
+.filter-button:active,
+.sort-button:active {
+  background-color: #292a2a;
 }
 
-.filter-list {
-  list-style: none;
-  padding: 0;
-  margin: 0;
-}
-
-.filter-list li {
-  font-size: 14px;
-  padding: 10px;
-  cursor: pointer;
-  border-bottom: 1px solid #eee;
-}
-
-.filter-list li:last-child {
-  border-bottom: none;
-}
-
-/* Marka Alt Menü */
-.submenu {
-  position: absolute;
-  top: 0;
-  left: 105%;
-  background-color: #fff;
-  border: 1px solid #ddd;
-  border-radius: 8px;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-  width: 200px;
-  padding: 15px;
-  z-index: 1000;
-}
-
-.checkbox-group {
+/* Ürün listeleme */
+.product-container {
   display: flex;
-  flex-direction: column;
-}
-
-.checkbox-label {
-  margin-bottom: 10px;
-  font-size: 14px;
-}
-
-.checkbox-label input {
-  margin-right: 10px;
-}
-
-/* Transition */
-.slide-down-enter-active,
-.slide-down-leave-active {
-  transition: all 0.3s ease;
-}
-.slide-down-enter-from,
-.slide-down-leave-to {
-  transform: translateY(-10px);
-  opacity: 0;
-}
-
-/* Kategori Menüsü */
-.category-menu {
-  display: flex;
-  flex-wrap: nowrap;
-  overflow-x: auto;
-  margin-bottom: 20px;
-  padding: 10px 0;
-}
-
-.category-button {
-  background-color: #fff;
-  border: 1px solid #ddd;
-  padding: 10px 15px;
-  margin-right: 10px;
-  font-size: 14px;
-  color: #333;
-  cursor: pointer;
-  white-space: nowrap;
-}
-
-.category-button:hover {
-  background-color: #000;
-  color: #fff;
-}
-
-/* Ürün Grid */
-.product-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  flex-wrap: wrap;
   gap: 20px;
+  justify-content: space-between;
 }
 
-/* Ürün Kartı */
-.product-card {
-  background-color: #fff;
-  border: 1px solid #ddd;
-  border-radius: 8px;
-  padding: 15px;
+.product {
+  width: calc(25% - 20px); /* Her ürün kutusu ekranın dörtte birini kaplar */
+  box-sizing: border-box;
+  margin-bottom: 20px;
   text-align: center;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
-.product-card img {
+.product-image {
   max-width: 100%;
   height: auto;
-  border-radius: 4px;
-  margin-bottom: 10px;
+  object-fit: cover;
 }
 
-.product-brand {
+.price {
+  font-size: 18px;
   font-weight: bold;
-  margin-bottom: 5px;
+  color: #000000;
+  margin: 10px 0;
+}
+
+.add-to-cart-button {
+  padding: 12px 24px;
   font-size: 14px;
-}
-
-.product-name {
-  font-size: 14px;
-  color: #555;
-  margin-bottom: 10px;
-}
-
-.product-price {
-  font-size: 16px;
-  font-weight: bold;
-  margin-bottom: 10px;
-}
-
-.add-to-cart {
-  background-color: #000;
-  color: #fff;
+  background-color: #000000;
+  color: white;
   border: none;
-  padding: 10px;
-  border-radius: 4px;
+  border-radius: 0px;
   cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
 }
 
-.add-to-cart:hover {
-  background-color: #555;
+.add-to-cart-button:hover {
+  background-color: #404040;
+  transform: scale(1.05);
+}
+
+.add-to-cart-button:active {
+  background-color: #292a2a;
 }
 </style>
