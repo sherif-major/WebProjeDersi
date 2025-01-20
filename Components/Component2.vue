@@ -27,26 +27,6 @@
     </div>
 
     <!-- Üye Ol Bölümü -->
-<<<<<<< HEAD
-    <div class="signup-section">
-      <h2>ÜYE OL</h2>
-      <p>Beymen.com'a üye olarak birçok avantajdan faydalanabilirsiniz. Öne çıkan avantajlar:</p>
-      <ul class="advantages">
-        <li>
-          <i class="fas fa-bullhorn"></i>
-          Kampanyalardan öncelikli olarak haberdar olabilirsiniz.
-        </li>
-        <li>
-          <i class="fas fa-mobile-alt"></i>
-          Beymen mobil uygulamaları ile alışveriş keyfinize telefonunuzdan devam edebilirsiniz.
-        </li>
-        <li>
-          <i class="fas fa-credit-card"></i>
-          The One Card'ınızı kayıt edebilir ve puanlarınızı kullanabilirsiniz.
-        </li>
-      </ul>
-      <button class="signup-button">ÜYE OL</button>
-=======
     <div class="page-container">
 
       <!-- Üye Ol Formu -->
@@ -104,18 +84,11 @@
           <button type="submit" class="signup-button">ÜYE OL</button>
         </form>
       </div>
->>>>>>> master
     </div>
   </div>
 </template>
 
 <script>
-<<<<<<< HEAD
-export default {
-  name: "LoginPage",
-};
-</script>
-=======
   import { defineComponent, ref } from 'vue';
   import { auth, db } from "../server/firebase"; // firebase.js'i bağla
   import { createUserWithEmailAndPassword, signInWithEmailAndPassword } from 'firebase/auth';
@@ -211,7 +184,6 @@ export default {
     },
   });
   </script>
->>>>>>> master
 
 <style scoped>
 /* Genel Ayarlar */
@@ -226,18 +198,11 @@ body {
 .login-page {
   display: flex;
   justify-content: center;
-<<<<<<< HEAD
-  align-items: flex-start;
-  gap: 30px;
-  padding: 50px;
-  background-color: #fff;
-=======
   align-items: center;
   gap: 30px;
   padding: 50px;
   background-color: #fff;
   padding:270px;
->>>>>>> master
 }
 
 /* Giriş Yap Bölümü */
@@ -247,20 +212,11 @@ body {
   padding: 20px;
   border: 1px solid #ddd;
   border-radius: 4px;
-<<<<<<< HEAD
-  background-color: #fff;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-}
-
-.login-section h2,
-.signup-section h2 {
-=======
   background-color: #f4f5f6;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 .login-section h2 {
->>>>>>> master
   font-size: 20px;
   margin-bottom: 20px;
   color: #333;
@@ -276,11 +232,7 @@ body {
 }
 
 .login-form input {
-<<<<<<< HEAD
-  width: 100%;
-=======
   width: 95%;
->>>>>>> master
   padding: 10px;
   margin-bottom: 15px;
   border: 1px solid #ccc;
@@ -324,50 +276,6 @@ body {
   background-color: #555;
 }
 
-<<<<<<< HEAD
-/* Üye Ol Bölümü */
-.signup-section p {
-  font-size: 14px;
-  color: #333;
-  margin-bottom: 20px;
-}
-
-.advantages {
-  list-style: none;
-  padding: 0;
-  margin: 0 0 20px 0;
-}
-
-.advantages li {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  font-size: 14px;
-  margin-bottom: 10px;
-  color: #333;
-}
-
-.advantages i {
-  font-size: 16px;
-  color: #333;
-}
-
-.signup-button {
-  width: 100%;
-  padding: 10px;
-  border: 1px solid #333;
-  background-color: #fff;
-  color: #333;
-  border-radius: 4px;
-  font-size: 14px;
-  cursor: pointer;
-}
-
-.signup-button:hover {
-  background-color: #333;
-  color: #fff;
-}
-=======
     .page-container {
       font-family: Arial, sans-serif;
       background-color: #f9f9f9;
@@ -457,5 +365,4 @@ body {
     .signup-button:hover {
       background-color: #555;
     }
->>>>>>> master
 </style>
